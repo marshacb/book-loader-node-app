@@ -11,7 +11,10 @@ var router = function (nav) {
 
     bookRouter.route('/')
         .get(function (req, res) {
-            var url = 'mongodb://localhost:27017/libraryApp';
+        
+        var MongoLabUri = 'mongodb://cmarshall:Cg24900610#@ds059694.mongolab.com:59694/multivision';
+        
+            var url = MongoLabUri; //'mongodb://localhost:27017/libraryApp';
 
             mongodb.connect(url, function (err, db) {
                 var collection = db.collection('books');
@@ -29,9 +32,19 @@ var router = function (nav) {
         .get(function (req, res) {
             var id = new objectId(req.params.id);
         
-            var MongoLabUri = 'mongodb://cmarshall:Cg24900610#@ds059694.mongolab.com:59694/multivision';
+            /*var url = process.env.PORT;
         
-            var url = process.env.MongoLabUri || 'mongodb://localhost:27017/libraryApp';
+            if(process.env.NODE_ENV = 'development')
+                {
+                    url = 'mongodb://localhost:27017/libraryApp';
+                }
+            else {
+                url = 'mongodb://cmarshall:Cg24900610#@ds059694.mongolab.com:59694/multivision';
+            } */
+        
+           var MongoLabUri = 'mongodb://cmarshall:Cg24900610#@ds059694.mongolab.com:59694/multivision';
+        
+            var url = MongoLabUri; //|| 'mongodb://localhost:27017/libraryApp';
                 
 
             mongodb.connect(url, function (err, db) {

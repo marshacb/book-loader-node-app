@@ -4,12 +4,22 @@ var app = express(); //gives an instance of express
 
 var port = process.env.PORT || 5000;
 
-var nav =  [{
-                Link: '/Books',
-                Text: 'Book'
+process.env.NODE_ENV = 'development';
+
+var url = 'localhost'
+
+if (process.env.NODE_ENV = 'development') {
+    url = 'mongodb://localhost:27017/libraryApp';
+} else {
+    url = 'mongodb://cmarshall:Cg24900610#@ds059694.mongolab.com:59694/multivision';
+}
+
+var nav = [{
+    Link: '/Books',
+    Text: 'Book'
         }, {
-                Link: '/Authors',
-                Text: 'Author'
+    Link: '/Authors',
+    Text: 'Author'
         }];
 
 var bookRouter = require('./src/routes/bookRoutes')(nav);

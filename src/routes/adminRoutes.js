@@ -4,7 +4,7 @@ var adminRouter = express.Router();
 
 var mongodb = require('mongodb').MongoClient;
 
-var books = [
+/*var books = [
     {
         title: 'War and Peace',
         genre: 'Historical Fiction',
@@ -23,21 +23,31 @@ var books = [
         author: 'Victor Hugo',
         read: false
 }
-            ];
+            ]; */
 
 var router = function(nav){
     
     adminRouter.route('/addBooks')
     .get(function(req, res){
         
-        var MongoLabUri = 'mongodb://cmarshall:Cg24900610#@ds059694.mongolab.com:59694/multivision';
+      /*  var url = process.env.PORT;
         
-        var url =  process.env.MongoLabUri ||  'mongodb://localhost:27017/libraryApp';
+            if(process.env.NODE_ENV = 'development')
+                {
+                    url = 'mongodb://localhost:27017/libraryApp';
+                }
+            else {
+                url = 'mongodb://cmarshall:Cg24900610#@ds059694.mongolab.com:59694/multivision';
+            }*/
+        
+       var MongoLabUri = 'mongodb://cmarshall:Cg24900610#@ds059694.mongolab.com:59694/multivision';
+        
+       var url =  MongoLabUri; //||  'mongodb://localhost:27017/libraryApp';
     
         
         mongodb.connect(url, function(err, db) {
             var collection = db.collection('books');
-            collection.insertMany(books, function(err, results){
+           //collection.insertMany(books, function(err, results){
                res.send(results);
                db.close();
             });
@@ -45,7 +55,7 @@ var router = function(nav){
         });
         
        // res.send('inserting books');
-    });
+    //});
     
     return adminRouter;
 };
