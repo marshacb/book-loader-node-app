@@ -14,6 +14,8 @@ var nav =  [{
 
 var bookRouter = require('./src/routes/bookRoutes')(nav);
 
+var adminRouter = require('./src/routes/adminRoutes')(nav);
+
 app.use(express.static('public')); //whatever is put here is used by express first before anything else
 
 app.set('views', './src/views');
@@ -22,7 +24,8 @@ app.set('view engine', 'ejs');
 
 
 
-app.use('/Books', bookRouter)
+app.use('/Books', bookRouter);
+app.use('/Admin', adminRouter);
 
 app.get('/', function (req, res) {
     res.render('index', {
@@ -37,9 +40,6 @@ app.get('/', function (req, res) {
     });
 });
 
-app.get('/books', function (req, res) {
-    res.send('Hello Books!');
-});
 app.listen(port, function (err) {
     console.log('running server on port ' + port);
 }); //callback is a function that is executed
