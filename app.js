@@ -20,7 +20,6 @@ var adminRouter = require('./src/routes/adminRoutes')(nav);
 
 var authRouter = require('./src/routes/authRoutes')(nav);
 
-var authorRouter = require('./src/routes/authorRoutes')(nav);
 
 app.use(bodyParser.json()); //looks to see if there is a body coming in thats json and url encoded bodies and create an object for us
 app.use(bodyParser.urlencoded({extended: true}));
@@ -40,7 +39,6 @@ app.use('/Books', bookRouter);  //middleware, loads router into app
 app.use('/Admin', adminRouter);
 app.use('/Auth', authRouter);
 
-app.use('Authors', authorRouter);
 
 app.get('/', function (req, res) {
     res.render('index', {
