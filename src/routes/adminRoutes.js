@@ -50,7 +50,7 @@ var router = function(nav){
         mongodb.connect(url, function(err, db) {
             var collection = db.collection('books');
          //  collection.insertMany(books, function(err, results){
-               res.send(results);
+            //   res.send(results);
                db.close();
             });
             
