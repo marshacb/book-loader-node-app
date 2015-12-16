@@ -4,11 +4,12 @@ var adminRouter = express.Router();
 
 var mongodb = require('mongodb').MongoClient;
 
-/*var books = [
+var books = [
     {
         title: 'War and Peace',
         genre: 'Historical Fiction',
         author: 'Lev Nikolayevich Toltstoy',
+        bookId: 656,
         read: false
 },
     {
@@ -21,9 +22,10 @@ var mongodb = require('mongodb').MongoClient;
         title: 'Les Miserables',
         genre: 'Historical Fiction',
         author: 'Victor Hugo',
+        bookId: 24280,
         read: false
 }
-            ]; */
+            ]; 
 
 var router = function(nav){
     
@@ -47,15 +49,15 @@ var router = function(nav){
         
         mongodb.connect(url, function(err, db) {
             var collection = db.collection('books');
-           //collection.insertMany(books, function(err, results){
+         //  collection.insertMany(books, function(err, results){
                res.send(results);
                db.close();
             });
             
         });
         
-       // res.send('inserting books');
-    //});
+      //  res.send('inserting books');
+   // });
     
     return adminRouter;
 };

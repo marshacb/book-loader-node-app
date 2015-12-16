@@ -6,64 +6,20 @@ var mongodb = require('mongodb').MongoClient;
 
 var objectId = require('mongodb').ObjectID;
 
+
+
 var router = function (nav) {
-
-
+        var bookService = require('../services/goodReadService')();
+        var bookController = require('../controllers/bookController')(bookService, nav);
+    
+     bookRouter.use(bookController.middleware);
+    
     bookRouter.route('/')
-        .get(function (req, res) {
-        
-        var MongoLabUri = 'mongodb://cmarshall:Cg24900610#@ds059694.mongolab.com:59694/multivision';
-        
-            var url = MongoLabUri; //'mongodb://localhost:27017/libraryApp';
-
-            mongodb.connect(url, function (err, db) {
-                var collection = db.collection('books');
-                collection.find({}).toArray(function (err, results) {
-                    res.render('bookListView', {
-                        title: 'Books',
-                        nav: nav,
-                        books: results
-                    });
-                });
-            });
-        });
+        .get(bookController.getIndex);
 
     bookRouter.route('/:id')
-        .get(function (req, res) {
-            var id = new objectId(req.params.id);
-        
-            /*var url = process.env.PORT;
-        
-            if(process.env.NODE_ENV = 'development')
-                {
-                    url = 'mongodb://localhost:27017/libraryApp';
-                }
-            else {
-                url = 'mongodb://cmarshall:Cg24900610#@ds059694.mongolab.com:59694/multivision';
-            } */
-        
-           var MongoLabUri = 'mongodb://cmarshall:Cg24900610#@ds059694.mongolab.com:59694/multivision';
-        
-            var url = MongoLabUri; //|| 'mongodb://localhost:27017/libraryApp';
-                
-
-            mongodb.connect(url, function (err, db) {
-                var collection = db.collection('books');
-                collection.findOne({
-                    _id: id
-                }, function (err, results) {
-                    res.render('bookView', {
-                        title: 'Books',
-                        nav: nav,
-                        book: results
-                    });
-
-
-                });
-
-
-            });
-        });
+        .get(bookController.getById);
+    
     return bookRouter;
 };
 
