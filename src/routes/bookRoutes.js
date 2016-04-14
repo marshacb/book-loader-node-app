@@ -9,7 +9,7 @@ var objectId = require('mongodb').ObjectID;
 
 
 var router = function (nav) {
-        var bookService = require('../services/goodReadService')();
+        var bookService = require('../services/goodreadService')();
         var bookController = require('../controllers/bookController')(bookService, nav);
     
      bookRouter.use(bookController.middleware);
